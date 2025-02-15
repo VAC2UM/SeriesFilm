@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SeriesFilm</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="landing_heading">Watch movies anytime anywhere</string>
+    <string name="landing_description">Explore a vast collection of blockbuster movies, timeless classics, and the latest releases.</string>
 </resources>
