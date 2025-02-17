@@ -13,7 +13,13 @@
         android:theme="@style/Theme.SeriesFilm"
         tools:targetApi="31">
         <activity
-            android:name=".Landing"
+            android:name=".Activities.Sign_Up"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Login"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Landing"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

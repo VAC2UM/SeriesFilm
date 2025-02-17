@@ -4,4 +4,9 @@
     <string name="sign_up">Sign Up</string>
     <string name="landing_heading">Watch movies anytime anywhere</string>
     <string name="landing_description">Explore a vast collection of blockbuster movies, timeless classics, and the latest releases.</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="question_login">Haven’t made an account? Sign Up</string>
+    <string name="question_sign_up">Already have an account? Login</string>
+    <string name="create_acc">Create Account</string>
 </resources>
