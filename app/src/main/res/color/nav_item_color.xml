@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:color="@color/white" /> <!-- Цвет, когда элемент выбран -->
+    <item android:color="@color/green" /> <!-- Цвет, когда элемент не выбран -->
+</selector>

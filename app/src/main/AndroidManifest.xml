@@ -13,6 +13,9 @@
         android:theme="@style/Theme.SeriesFilm"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.Sign_Up"
             android:exported="false" />
         <activity

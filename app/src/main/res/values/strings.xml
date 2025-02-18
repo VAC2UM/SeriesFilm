@@ -9,4 +9,9 @@
     <string name="question_login">Haven’t made an account? Sign Up</string>
     <string name="question_sign_up">Already have an account? Login</string>
     <string name="create_acc">Create Account</string>
+    <string name="username">Username</string>
+    <string name="home">Home</string>
+    <string name="favorites">Favorites</string>
+    <string name="search">Search</string>
+    <string name="settings">Settings</string>
 </resources>

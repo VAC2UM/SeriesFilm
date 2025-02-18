@@ -67,7 +67,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:hint="@string/email"
+                android:hint="@string/username"
                 android:imeOptions="actionNext"
                 android:textColor="@color/green"
                 android:textColorHint="@color/white" />
