@@ -1,4 +1,4 @@
-package com.example.seriesfilm.Activities
+package com.example.seriesfilm.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,7 @@ class Landing : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.landing)
+        setContentView(R.layout.activity_landing)
 
         login_btn = findViewById(R.id.login_btn)
         sign_up_btn = findViewById(R.id.sign_up)
