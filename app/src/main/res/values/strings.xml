@@ -11,10 +11,14 @@
     <string name="create_acc">Create Account</string>
     <string name="username">Username</string>
     <string name="home">Home</string>
-    <string name="favorites">Favorites</string>
+    <string name="favorites">Избранное</string>
     <string name="search">Search</string>
-    <string name="search_for_title">Search for a title...</string>
-    <string name="settings">Settings</string>
-    <string name="popular_movie">Popular Movie</string>
-    <string name="new_movie">New and Noteworthly</string>
+    <string name="search_for_title">Поиск по названию...</string>
+    <string name="settings">Настройки</string>
+    <string name="popular_movie">Популярные фильмы</string>
+    <string name="new_movie">Новые фильмы</string>
+    <string name="account">Аккаунт</string>
+    <string name="privacy">Приватность</string>
+    <string name="storage">Список фильмов</string>
+    <string name="help">Помощь</string>
 </resources>

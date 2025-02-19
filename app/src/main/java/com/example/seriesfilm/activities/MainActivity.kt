@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().replace(R.id.frame_layout, HomeFragment())
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment())
                 .commit()
         }
 
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
             // Замена фрагмента
             selectedFragment?.let {
-                supportFragmentManager.beginTransaction().replace(R.id.frame_layout, it).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, it).commit()
             }
             true
         }
