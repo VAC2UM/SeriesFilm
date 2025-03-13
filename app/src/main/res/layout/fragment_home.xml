@@ -45,13 +45,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/popularPosterFilm"
-                android:layout_width="100dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/breaking_bad"
-                app:layout_constraintStart_toStartOf="parent"
+            <!--            <ImageView-->
+            <!--                android:id="@+id/popularPosterFilm"-->
+            <!--                android:layout_width="100dp"-->
+            <!--                android:layout_height="150dp"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:src="@drawable/breaking_bad"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/popularFilmText" />-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/polpularFilmsList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/popularFilmText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -89,5 +95,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/newFilmText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/testTextAPI"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/newFilms" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -46,4 +46,17 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.circleimageview)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    //GSON
+    implementation(libs.gson)
+
+    //Glide
+    implementation(libs.glide)
+
+    //Picasso
+    implementation(libs.picasso)
 }

@@ -1,15 +1,21 @@
 package com.example.seriesfilm.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.seriesfilm.Adapters.MoviesAdapter
 import com.example.seriesfilm.R
 
 class HomeFragment : Fragment() {
-    lateinit var testPoster: ImageView
+    lateinit var testTextAPI: TextView
+    lateinit var recyclerView: RecyclerView
+    private lateinit var moviesAdapter: MoviesAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -17,15 +23,14 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        testPoster = view.findViewById(R.id.popularPosterFilm)
+        testTextAPI = view.findViewById(R.id.testTextAPI)
+        recyclerView = view.findViewById(R.id.polpularFilmsList)
 
-        testPoster.setOnClickListener {
-            val filmFragment = FilmFragment()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, filmFragment)
-                .addToBackStack(null)
-                .commit()
-        }
+        moviesAdapter = MoviesAdapter(emptyList())
+        recyclerView.adapter = moviesAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+
         return view
     }
 }
