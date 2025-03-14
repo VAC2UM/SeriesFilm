@@ -2,7 +2,7 @@
 <resources>
 
     <style name="SearchViewTheme" parent="Widget.AppCompat.SearchView">
-        <item name="android:textColor">@color/green</item>
-        <item name="android:textColorHint">@color/green</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/black</item>
     </style>
 </resources>
