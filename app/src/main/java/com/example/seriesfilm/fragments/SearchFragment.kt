@@ -50,8 +50,15 @@ class SearchFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // Optional: Handle text change if needed
-                return false
+                val closeButton =
+                    searchView.findViewById<View>(androidx.appcompat.R.id.search_close_btn)
+                closeButton.visibility = View.GONE
+                if (newText.isNullOrEmpty()) {
+                    closeButton.visibility = View.GONE
+                } else {
+                    closeButton.visibility = View.VISIBLE
+                }
+                return true
             }
         })
 
