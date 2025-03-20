@@ -1,5 +1,6 @@
 package com.example.seriesfilm.Adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,15 +28,18 @@ class MoviesAdapter(private var movies: List<SearchResult>) :
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = movies[position]
         Picasso.get().load(movie.imageUrl).into(holder.poster)
+        Log.d("MoviesAdapter", "Film: ${movie.name}. Poster URL: ${movie.imageUrl}")
         holder.filmName.text = movie.name
         holder.filmYear.text = movie.year.toString()
         holder.filmType.text = movie.type
+
     }
 
     override fun getItemCount(): Int = movies.size
-
     fun updateMovies(newMovies: List<SearchResult>) {
-        movies = newMovies
+        val filteredMovies =
+            newMovies.filter { !it.imageUrl.isNullOrEmpty() && it.imageUrl != "https://cdn.watchmode.com/posters/blank.gif" }
+        movies = filteredMovies
         notifyDataSetChanged()
     }
 }

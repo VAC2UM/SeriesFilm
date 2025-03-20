@@ -22,4 +22,8 @@
     <string name="storage">Список фильмов</string>
     <string name="help">Помощь</string>
     <string name="error_fetch_movies">Пожалуйста, проверьте своё интернет-соединение</string>
+    <string name="update">Обновить</string>
+    <string name="name">Name</string>
+    <string name="year">Year</string>
+    <string name="director">Director</string>
 </resources>
