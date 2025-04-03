@@ -2,6 +2,7 @@ package com.example.seriesfilm.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -193,11 +194,12 @@ class SearchFragment : Fragment() {
             text = "История поиска"
             textSize = 18f
             setTextColor(resources.getColor(android.R.color.white, null))
+            setTypeface(null, Typeface.BOLD)
             setPadding(16, 16, 16, 8)
         }
-        historyContainer.addView(title)
+        historyContainer.addView(title) // Добавляем первым
 
-        history.forEach { query ->
+        for (query in history.reversed()) {
             val historyItem = TextView(context).apply {
                 text = query
                 textSize = 16f
@@ -209,8 +211,8 @@ class SearchFragment : Fragment() {
                 }
             }
             historyContainer.addView(historyItem)
-        }
 
+        }
         val clearButton = Button(context).apply {
             text = "Очистить историю"
             setOnClickListener { clearSearchHistory() }
