@@ -44,9 +44,10 @@
             app:layout_constraintTop_toBottomOf="@id/loginText">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLogin"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:hint="@string/email"
+                android:hint="@string/username"
                 android:imeOptions="actionNext"
                 android:textColor="@color/green"
                 android:textColorHint="@color/white" />
@@ -66,7 +67,7 @@
             app:layout_constraintTop_toBottomOf="@id/loginLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password"
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/password"
@@ -86,19 +87,22 @@
             android:gravity="center"
             android:text="@string/login"
             android:textAllCaps="false"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/questionBtn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/questionText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/passwordLayout" />
 
-        <TextView
-            android:id="@+id/questionText"
+        <Button
+            android:id="@+id/questionBtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:background="@drawable/button_full"
+            android:fontFamily="@font/inter"
             android:gravity="center"
             android:text="@string/question_login"
-            android:textColor="@color/white"
-            android:textSize="13sp"
+            android:textAllCaps="false"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
