@@ -36,7 +36,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -59,4 +58,7 @@ dependencies {
 
     //Picasso
     implementation(libs.picasso)
+
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 }
