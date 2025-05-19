@@ -20,19 +20,22 @@ class MoviesAdapter(private var movies: List<SearchResult>) :
         val filmType: TextView = itemView.findViewById(R.id.filmType)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup, viewType: Int
+    ): MovieViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
         return MovieViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: MovieViewHolder, position: Int
+    ) {
         val movie = movies[position]
         Picasso.get().load(movie.imageUrl).into(holder.poster)
         Log.d("MoviesAdapter", "Film: ${movie.name}. Poster URL: ${movie.imageUrl}")
         holder.filmName.text = movie.name
         holder.filmYear.text = movie.year.toString()
         holder.filmType.text = movie.type
-
     }
 
     override fun getItemCount(): Int = movies.size

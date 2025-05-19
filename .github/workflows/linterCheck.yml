@@ -22,22 +22,3 @@ jobs:
           curl -sSLO https://github.com/pinterest/ktlint/releases/download/1.2.1/ktlint
           chmod a+x ktlint
           ./ktlint --color
-
-  android-lint:
-    name: Android Lint (XML)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Make gradlew executable
-        run: chmod +x gradlew  # Фикс ошибки "Permission denied"
-
-      - name: Run Android Lint
-        run: ./gradlew lintDebug

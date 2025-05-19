@@ -22,7 +22,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -46,17 +46,17 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.circleimageview)
 
-    //Retrofit
+    //  Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
-    //GSON
+    // GSON
     implementation(libs.gson)
 
-    //Glide
+    // Glide
     implementation(libs.glide)
 
-    //Picasso
+    // Picasso
     implementation(libs.picasso)
 
     implementation(libs.okhttp)
