@@ -44,26 +44,33 @@ class SignUp : AppCompatActivity() {
 
     private fun registerUser(
         login: String,
-        password: String, email: String
+        password: String,
+        email: String,
     ) {
         val call = ApiClient.authApi.register(AuthModels.RegisterRequest(login, password, email))
-        call.enqueue(object : Callback<AuthModels.AuthResponse> {
-            override fun onResponse(
-                call: Call<AuthModels.AuthResponse>,
-                response: Response<AuthModels.AuthResponse>
-            ) {
-                if (response.isSuccessful) {
-                    val intent = Intent(this@SignUp, Login::class.java)
-                    startActivity(intent)
-                } else {
-                    Toast.makeText(this@SignUp, "Ошибка регистрации!", Toast.LENGTH_SHORT).show()
+        call.enqueue(
+            object : Callback<AuthModels.AuthResponse> {
+                override fun onResponse(
+                    call: Call<AuthModels.AuthResponse>,
+                    response: Response<AuthModels.AuthResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val intent = Intent(this@SignUp, Login::class.java)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this@SignUp, "Ошибка регистрации!", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<AuthModels.AuthResponse>, t: Throwable) {
-                Toast.makeText(this@SignUp, "Ошибка сети: ${t.message}", Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "ERROR: ${t.message.toString()}")
-            }
-        })
+                override fun onFailure(
+                    call: Call<AuthModels.AuthResponse>,
+                    t: Throwable,
+                ) {
+                    Toast.makeText(this@SignUp, "Ошибка сети: ${t.message}", Toast.LENGTH_SHORT)
+                        .show()
+                    Log.d(TAG, "ERROR: ${t.message}")
+                }
+            })
     }
 }

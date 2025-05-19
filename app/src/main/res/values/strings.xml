@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">SeriesFilm</string>
-    <string name="login">Login</string>
-    <string name="sign_up">Sign Up</string>
+    <string name="login">Логин</string>
+    <string name="sign_up">Регистрация</string>
     <string name="landing_heading">Смотрите фильмы где угодно и когда угодно</string>
-    <string name="landing_description">Explore a vast collection of blockbuster movies, timeless classics, and the latest releases.</string>
+    <string name="landing_description">Познакомьтесь с обширной коллекцией блокбастеров, вечной классики и последних релизов.</string>
     <string name="email">Почта</string>
     <string name="password">Пароль</string>
     <string name="question_login">Еще нет аккаунта? Создайте!</string>
@@ -23,7 +23,7 @@
     <string name="help">Помощь</string>
     <string name="error_fetch_movies">Пожалуйста, проверьте своё интернет-соединение</string>
     <string name="update">Обновить</string>
-    <string name="name">Name</string>
-    <string name="year">Year</string>
-    <string name="director">Director</string>
+    <string name="name">Имя</string>
+    <string name="year">Год</string>
+    <string name="director">Режиссер</string>
 </resources>

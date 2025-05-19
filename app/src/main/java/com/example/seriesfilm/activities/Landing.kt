@@ -22,7 +22,7 @@ class Landing : AppCompatActivity() {
             startActivity(intent)
         }
         sign_up_btn.setOnClickListener {
-            val intent = Intent(this, Sign_Up::class.java)
+            val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
         }
     }

@@ -12,10 +12,11 @@ object MoviesRepository {
     private val api: Api
 
     init {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.watchmode.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        val retrofit =
+            Retrofit.Builder()
+                .baseUrl("https://api.watchmode.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
 
         api = retrofit.create(Api::class.java)
     }
@@ -23,14 +24,14 @@ object MoviesRepository {
     fun fetchMovies(
         searchValue: String,
         searchType: Int,
-        callback: (List<SearchResult>?, String?) -> Unit
+        callback: (List<SearchResult>?, String?) -> Unit,
     ) {
         val call = api.autocompleteSearch(searchValue, searchType)
 
         call.enqueue(object : Callback<AutocompleteSearchResponse> {
             override fun onResponse(
                 call: Call<AutocompleteSearchResponse>,
-                response: Response<AutocompleteSearchResponse>
+                response: Response<AutocompleteSearchResponse>,
             ) {
                 if (response.isSuccessful) {
                     val results = response.body()?.results
@@ -41,7 +42,10 @@ object MoviesRepository {
                 }
             }
 
-            override fun onFailure(call: Call<AutocompleteSearchResponse>, t: Throwable) {
+            override fun onFailure(
+                call: Call<AutocompleteSearchResponse>,
+                t: Throwable,
+            ) {
                 callback(null, "Request failed: ${t.message}")
                 t.printStackTrace()
             }
