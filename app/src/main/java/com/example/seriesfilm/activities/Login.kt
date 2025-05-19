@@ -52,7 +52,7 @@ class Login : AppCompatActivity() {
                 AuthModels.LoginRequest(
                     login,
                     password,
-                )
+                ),
             )
         call.enqueue(
             object : Callback<AuthModels.AuthResponse> {
@@ -74,7 +74,7 @@ class Login : AppCompatActivity() {
                     Toast.makeText(this@Login, "Ошибка сети: ${t.message}", Toast.LENGTH_SHORT)
                         .show()
                 }
-            }
+            },
         )
     }
 }

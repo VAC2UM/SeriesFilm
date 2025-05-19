@@ -50,6 +50,7 @@ object MoviesRepository {
                     callback(null, "Request failed: ${t.message}")
                     t.printStackTrace()
                 }
-            })
+            }
+        )
     }
 }

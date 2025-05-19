@@ -71,7 +71,7 @@ class SignUp : AppCompatActivity() {
                         .show()
                     Log.d(TAG, "ERROR: ${t.message}")
                 }
-            }
+            },
         )
     }
 }

@@ -1,7 +1,7 @@
 package com.example.seriesfilm
 
-import org.junit.Test
 import org.junit.Assert.assertEquals
+import org.junit.Test
 
 class ExampleUnitTest {
     @Test

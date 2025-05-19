@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.seriesfilm.data.SearchResult
 import com.example.seriesfilm.R
+import com.example.seriesfilm.data.SearchResult
 import com.squareup.picasso.Picasso
 
 class MoviesAdapter(private var movies: List<SearchResult>) :

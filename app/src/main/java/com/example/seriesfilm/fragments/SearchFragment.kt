@@ -19,9 +19,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.seriesfilm.adapters.MoviesAdapter
 import com.example.seriesfilm.MoviesRepository
 import com.example.seriesfilm.R
+import com.example.seriesfilm.adapters.MoviesAdapter
 
 class SearchFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -109,7 +109,8 @@ class SearchFragment : Fragment() {
                     }
                     return true
                 }
-            })
+            }
+        )
 
         updateBtn.setOnClickListener {
             val query = searchView.query.toString()
