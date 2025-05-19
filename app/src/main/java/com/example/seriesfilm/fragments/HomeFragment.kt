@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.seriesfilm.Adapters.MoviesAdapter
 import com.example.seriesfilm.R
+import com.example.seriesfilm.adapters.MoviesAdapter
 
 class HomeFragment : Fragment() {
     lateinit var testTextAPI: TextView
@@ -17,9 +17,9 @@ class HomeFragment : Fragment() {
     private lateinit var moviesAdapter: MoviesAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
@@ -28,9 +28,8 @@ class HomeFragment : Fragment() {
 
         moviesAdapter = MoviesAdapter(emptyList())
         recyclerView.adapter = moviesAdapter
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         return view
     }
 }

@@ -19,9 +19,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.seriesfilm.Adapters.MoviesAdapter
 import com.example.seriesfilm.MoviesRepository
 import com.example.seriesfilm.R
+import com.example.seriesfilm.adapters.MoviesAdapter
 
 class SearchFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -39,8 +39,9 @@ class SearchFragment : Fragment() {
     private var searchRunnable: Runnable? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
 
@@ -50,7 +51,8 @@ class SearchFragment : Fragment() {
         historyContainer = view.findViewById(R.id.historyContainer)
         progressBar = view.findViewById(R.id.progressBar)
 
-        sharedPreferences = requireContext().getSharedPreferences("SearchPrefs", Context.MODE_PRIVATE)
+        sharedPreferences =
+            requireContext().getSharedPreferences("SearchPrefs", Context.MODE_PRIVATE)
 
         moviesAdapter = MoviesAdapter(emptyList())
         recyclerView.adapter = moviesAdapter
@@ -61,50 +63,54 @@ class SearchFragment : Fragment() {
             showSearchHistory()
         }
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                // Отменяем отложенный поиск, если он был
-                cancelDelayedSearch()
+        searchView.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    // Отменяем отложенный поиск, если он был
+                    cancelDelayedSearch()
 
-                if (!query.isNullOrEmpty()) {
-                    addToSearchHistory(query)
-                    performSearch(query)
-                } else {
-                    Toast.makeText(
-                        context,
-                        "Пожалуйста, введите корректный запрос",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                // Отменяем предыдущий отложенный поиск
-                cancelDelayedSearch()
-
-                val closeButton = searchView.findViewById<View>(androidx.appcompat.R.id.search_close_btn)
-                closeButton.visibility = View.GONE
-
-                if (newText.isNullOrEmpty()) {
-                    closeButton.visibility = View.GONE
-                } else {
-                    closeButton.visibility = View.VISIBLE
-
-                    // Запускаем отложенный поиск через 2 секунды
-                    if (newText.length >= 3) { // Ищем только если введено хотя бы 3 символа
-                        searchRunnable = Runnable {
-                            if (!newText.isNullOrEmpty()) {
-                                addToSearchHistory(newText)
-                                performSearch(newText)
-                            }
-                        }
-                        handler.postDelayed(searchRunnable!!, searchDelayMillis)
+                    if (!query.isNullOrEmpty()) {
+                        addToSearchHistory(query)
+                        performSearch(query)
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Пожалуйста, введите корректный запрос",
+                            Toast.LENGTH_SHORT,
+                        ).show()
                     }
+                    return true
                 }
-                return true
-            }
-        })
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    // Отменяем предыдущий отложенный поиск
+                    cancelDelayedSearch()
+
+                    val closeButton =
+                        searchView.findViewById<View>(androidx.appcompat.R.id.search_close_btn)
+                    closeButton.visibility = View.GONE
+
+                    if (newText.isNullOrEmpty()) {
+                        closeButton.visibility = View.GONE
+                    } else {
+                        closeButton.visibility = View.VISIBLE
+
+                        // Запускаем отложенный поиск через 2 секунды
+                        if (newText.length >= 3) { // Ищем только если введено хотя бы 3 символа
+                            searchRunnable =
+                                Runnable {
+                                    if (!newText.isNullOrEmpty()) {
+                                        addToSearchHistory(newText)
+                                        performSearch(newText)
+                                    }
+                                }
+                            handler.postDelayed(searchRunnable!!, searchDelayMillis)
+                        }
+                    }
+                    return true
+                }
+            },
+        )
 
         updateBtn.setOnClickListener {
             val query = searchView.query.toString()
@@ -190,36 +196,38 @@ class SearchFragment : Fragment() {
         historyContainer.removeAllViews()
         historyContainer.visibility = View.VISIBLE
 
-        val title = TextView(context).apply {
-            text = "История поиска"
-            textSize = 18f
-            setTextColor(resources.getColor(android.R.color.white, null))
-            setTypeface(null, Typeface.BOLD)
-            setPadding(16, 16, 16, 8)
-        }
+        val title =
+            TextView(context).apply {
+                text = "История поиска"
+                textSize = 18f
+                setTextColor(resources.getColor(android.R.color.white, null))
+                setTypeface(null, Typeface.BOLD)
+                setPadding(16, 16, 16, 8)
+            }
         historyContainer.addView(title) // Добавляем первым
 
         for (query in history.reversed()) {
-            val historyItem = TextView(context).apply {
-                text = query
-                textSize = 16f
-                setTextColor(resources.getColor(android.R.color.white, null))
-                setPadding(32, 16, 16, 16)
-                setOnClickListener {
-                    searchView.setQuery(query, true)
-                    hideHistory()
+            val historyItem =
+                TextView(context).apply {
+                    text = query
+                    textSize = 16f
+                    setTextColor(resources.getColor(android.R.color.white, null))
+                    setPadding(32, 16, 16, 16)
+                    setOnClickListener {
+                        searchView.setQuery(query, true)
+                        hideHistory()
+                    }
                 }
-            }
             historyContainer.addView(historyItem)
-
         }
-        val clearButton = Button(context).apply {
-            text = "Очистить историю"
-            setOnClickListener { clearSearchHistory() }
-            setBackgroundColor(resources.getColor(R.color.red, null))
-            setTextColor(resources.getColor(android.R.color.white, null))
-            setPadding(16, 16, 16, 16)
-        }
+        val clearButton =
+            Button(context).apply {
+                text = "Очистить историю"
+                setOnClickListener { clearSearchHistory() }
+                setBackgroundColor(resources.getColor(R.color.red, null))
+                setTextColor(resources.getColor(android.R.color.white, null))
+                setPadding(16, 16, 16, 16)
+            }
         historyContainer.addView(clearButton)
     }
 

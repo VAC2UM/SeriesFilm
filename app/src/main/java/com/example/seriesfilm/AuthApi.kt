@@ -6,8 +6,12 @@ import retrofit2.http.POST
 
 interface AuthApi {
     @POST("login")
-    fun login(@Body requset: AuthModels.LoginRequest): Call<AuthModels.AuthResponse>
+    fun login(
+        @Body requset: AuthModels.LoginRequest,
+    ): Call<AuthModels.AuthResponse>
 
     @POST("register")
-    fun register(@Body request: AuthModels.RegisterRequest): Call<AuthModels.AuthResponse>
+    fun register(
+        @Body request: AuthModels.RegisterRequest,
+    ): Call<AuthModels.AuthResponse>
 }

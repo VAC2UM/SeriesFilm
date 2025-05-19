@@ -1,6 +1,6 @@
 package com.example.seriesfilm
 
-import com.example.seriesfilm.Data.AutocompleteSearchResponse
+import com.example.seriesfilm.data.AutocompleteSearchResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -14,6 +14,6 @@ interface Api {
     fun autocompleteSearch(
         @Query("search_value") searchValue: String,
         @Query("search_type") searchType: Int,
-        @Query("apiKey") apiKey: String = API_KEY
+        @Query("apiKey") apiKey: String = API_KEY,
     ): Call<AutocompleteSearchResponse>
 }
