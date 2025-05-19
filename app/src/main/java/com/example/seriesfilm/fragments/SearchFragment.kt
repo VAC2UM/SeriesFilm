@@ -109,7 +109,7 @@ class SearchFragment : Fragment() {
                     }
                     return true
                 }
-            }
+            },
         )
 
         updateBtn.setOnClickListener {
