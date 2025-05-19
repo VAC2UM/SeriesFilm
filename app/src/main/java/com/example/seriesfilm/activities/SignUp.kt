@@ -52,7 +52,7 @@ class SignUp : AppCompatActivity() {
             object : Callback<AuthModels.AuthResponse> {
                 override fun onResponse(
                     call: Call<AuthModels.AuthResponse>,
-                    response: Response<AuthModels.AuthResponse>
+                    response: Response<AuthModels.AuthResponse>,
                 ) {
                     if (response.isSuccessful) {
                         val intent = Intent(this@SignUp, Login::class.java)
@@ -71,6 +71,7 @@ class SignUp : AppCompatActivity() {
                         .show()
                     Log.d(TAG, "ERROR: ${t.message}")
                 }
-            })
+            }
+        )
     }
 }

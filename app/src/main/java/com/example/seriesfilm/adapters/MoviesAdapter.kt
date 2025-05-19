@@ -1,4 +1,4 @@
-package com.example.seriesfilm.Adapters
+package com.example.seriesfilm.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.seriesfilm.Data.SearchResult
+import com.example.seriesfilm.data.SearchResult
 import com.example.seriesfilm.R
 import com.squareup.picasso.Picasso
 
@@ -21,14 +21,16 @@ class MoviesAdapter(private var movies: List<SearchResult>) :
     }
 
     override fun onCreateViewHolder(
-        parent: ViewGroup, viewType: Int
+        parent: ViewGroup,
+        viewType: Int,
     ): MovieViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
         return MovieViewHolder(view)
     }
 
     override fun onBindViewHolder(
-        holder: MovieViewHolder, position: Int
+        holder: MovieViewHolder,
+        position: Int,
     ) {
         val movie = movies[position]
         Picasso.get().load(movie.imageUrl).into(holder.poster)
@@ -39,6 +41,7 @@ class MoviesAdapter(private var movies: List<SearchResult>) :
     }
 
     override fun getItemCount(): Int = movies.size
+
     fun updateMovies(newMovies: List<SearchResult>) {
         val filteredMovies =
             newMovies.filter { !it.imageUrl.isNullOrEmpty() && it.imageUrl != "https://cdn.watchmode.com/posters/blank.gif" }

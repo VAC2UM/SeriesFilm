@@ -1,4 +1,4 @@
-package com.example.seriesfilm.Data
+package com.example.seriesfilm.data
 
 import com.google.gson.annotations.SerializedName
 
@@ -11,5 +11,5 @@ data class SearchResult(
     @SerializedName("result_type") val resultType: String,
     @SerializedName("tmdb_id") val tmdbId: Long,
     @SerializedName("tmdb_type") val tmdbType: String,
-    @SerializedName("image_url") val imageUrl: String
+    @SerializedName("image_url") val imageUrl: String,
 )

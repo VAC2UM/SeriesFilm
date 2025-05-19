@@ -45,14 +45,15 @@ class Login : AppCompatActivity() {
 
     private fun loginUser(
         login: String,
-        password: String
+        password: String,
     ) {
-        val call = ApiClient.authApi.login(
-            AuthModels.LoginRequest(
-                login,
-                password
+        val call =
+            ApiClient.authApi.login(
+                AuthModels.LoginRequest(
+                    login,
+                    password,
+                )
             )
-        )
         call.enqueue(
             object : Callback<AuthModels.AuthResponse> {
                 override fun onResponse(
@@ -68,11 +69,12 @@ class Login : AppCompatActivity() {
 
                 override fun onFailure(
                     call: Call<AuthModels.AuthResponse>,
-                    t: Throwable
+                    t: Throwable,
                 ) {
                     Toast.makeText(this@Login, "Ошибка сети: ${t.message}", Toast.LENGTH_SHORT)
                         .show()
                 }
-            })
+            }
+        )
     }
 }
