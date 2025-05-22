@@ -11,13 +11,24 @@ import com.example.seriesfilm.R
 import com.example.seriesfilm.data.SearchResult
 import com.squareup.picasso.Picasso
 
-class MoviesAdapter(private var movies: List<SearchResult>) :
+class MoviesAdapter(
+    private var movies: List<SearchResult>,
+    private var onItemClick: (SearchResult) -> Unit,
+) :
     RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
-    class MovieViewHolder(item_movie: View) : RecyclerView.ViewHolder(item_movie) {
-        val poster: ImageView = item_movie.findViewById(R.id.item_movie_poster)
+    class MovieViewHolder(
+        itemView: View,
+        private val onItemClick: (SearchResult) -> Unit,
+    ) :
+        RecyclerView.ViewHolder(itemView) {
+        val poster: ImageView = itemView.findViewById(R.id.item_movie_poster)
         val filmName: TextView = itemView.findViewById(R.id.filmName)
         val filmYear: TextView = itemView.findViewById(R.id.filmYear)
         val filmType: TextView = itemView.findViewById(R.id.filmType)
+
+        fun bind(movie: SearchResult) {
+            itemView.setOnClickListener { (onItemClick(movie)) }
+        }
     }
 
     override fun onCreateViewHolder(
@@ -25,7 +36,7 @@ class MoviesAdapter(private var movies: List<SearchResult>) :
         viewType: Int,
     ): MovieViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
-        return MovieViewHolder(view)
+        return MovieViewHolder(view, onItemClick)
     }
 
     override fun onBindViewHolder(
@@ -38,6 +49,7 @@ class MoviesAdapter(private var movies: List<SearchResult>) :
         holder.filmName.text = movie.name
         holder.filmYear.text = movie.year.toString()
         holder.filmType.text = movie.type
+        holder.bind(movie)
     }
 
     override fun getItemCount(): Int = movies.size
