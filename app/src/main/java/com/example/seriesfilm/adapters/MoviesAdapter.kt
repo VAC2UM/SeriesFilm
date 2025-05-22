@@ -18,7 +18,7 @@ class MoviesAdapter(
     RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
     class MovieViewHolder(
         itemView: View,
-        private val onItemClick: (SearchResult) -> Unit
+        private val onItemClick: (SearchResult) -> Unit,
     ) :
         RecyclerView.ViewHolder(itemView) {
         val poster: ImageView = itemView.findViewById(R.id.item_movie_poster)

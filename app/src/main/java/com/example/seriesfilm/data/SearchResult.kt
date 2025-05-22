@@ -15,4 +15,4 @@ data class SearchResult(
     @SerializedName("tmdb_id") val tmdbId: Long,
     @SerializedName("tmdb_type") val tmdbType: String,
     @SerializedName("image_url") val imageUrl: String,
-): Parcelable
+) : Parcelable

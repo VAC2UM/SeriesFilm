@@ -27,17 +27,15 @@ class HomeFragment : Fragment() {
         testTextAPI = view.findViewById(R.id.testTextAPI)
         recyclerView = view.findViewById(R.id.polpularFilmsList)
 
-        moviesAdapter = MoviesAdapter(emptyList()) { movie ->
-            // Переход на фрагмент с деталями фильма
-            val fragment = FilmFragment.newInstance(movie)
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit()
-
-            // Toast для проверки
-            Toast.makeText(context, "Фильм: ${movie.name}", Toast.LENGTH_SHORT).show()
-        }
+        moviesAdapter =
+            MoviesAdapter(emptyList()) { movie ->
+                // Переход на фрагмент с деталями фильма
+                val fragment = FilmFragment.newInstance(movie)
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
 
         recyclerView.adapter = moviesAdapter
         recyclerView.layoutManager =

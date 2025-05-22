@@ -59,7 +59,10 @@ class FilmFragment : Fragment() {
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
         super.onViewCreated(view, savedInstanceState)
         Toast.makeText(context, "Film: ${movie.name}", Toast.LENGTH_SHORT).show()
     }
@@ -70,7 +73,11 @@ class FilmFragment : Fragment() {
                 // Обновляем UI с полученными данными
                 updateUI(details)
             } else {
-                Toast.makeText(context, "Ошибка загрузки: ${error ?: "Unknown"}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Ошибка загрузки: ${error ?: "Unknown"}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
