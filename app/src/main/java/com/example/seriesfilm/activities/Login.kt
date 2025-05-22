@@ -62,6 +62,9 @@ class Login : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         Toast.makeText(this@Login, "Успешный вход!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@Login, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(this@Login, "Ошибка входа!", Toast.LENGTH_SHORT).show()
                     }

@@ -2,6 +2,7 @@ package com.example.seriesfilm
 
 import com.example.seriesfilm.data.AutocompleteSearchResponse
 import com.example.seriesfilm.data.SearchResult
+import com.example.seriesfilm.data.TitleDetailsResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,6 +52,37 @@ object MoviesRepository {
                     t.printStackTrace()
                 }
             },
+        )
+    }
+
+    fun fetchTitleDetails(
+        titleId: Long,
+        callback: (TitleDetailsResponse?, String?) -> Unit,
+    ) {
+        val call = api.getTitleDetails(titleId)
+
+        call.enqueue(
+            object : Callback<TitleDetailsResponse> {
+                override fun onResponse(
+                    call: Call<TitleDetailsResponse>,
+                    response: Response<TitleDetailsResponse>,
+                ) {
+                    if (response.isSuccessful) {
+                        callback(response.body(), null)
+                    } else {
+                        val errorBody = response.errorBody()?.string()
+                        callback(null, "Error: ${response.message()}, Error Body: $errorBody")
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<TitleDetailsResponse>,
+                    t: Throwable,
+                ) {
+                    callback(null, "Request failed: ${t.message}")
+                    t.printStackTrace()
+                }
+            }
         )
     }
 }

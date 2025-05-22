@@ -54,7 +54,18 @@ class SearchFragment : Fragment() {
         sharedPreferences =
             requireContext().getSharedPreferences("SearchPrefs", Context.MODE_PRIVATE)
 
-        moviesAdapter = MoviesAdapter(emptyList())
+        moviesAdapter = MoviesAdapter(emptyList()) { movie ->
+            // Переход на фрагмент с деталями фильма
+            val fragment = FilmFragment.newInstance(movie)
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
+
+            // Можно также показать Toast (по желанию)
+            Toast.makeText(context, "Фильм: ${movie.name}", Toast.LENGTH_SHORT).show()
+        }
+
         recyclerView.adapter = moviesAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 

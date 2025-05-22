@@ -16,10 +16,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SignUp : AppCompatActivity() {
-    lateinit var registerBtn: Button
-    lateinit var etLogin: TextInputEditText
-    lateinit var etPassword: TextInputEditText
-    lateinit var etEmail: TextInputEditText
+    private lateinit var registerBtn: Button
+    private lateinit var etLogin: TextInputEditText
+    private lateinit var etPassword: TextInputEditText
+    private lateinit var etEmail: TextInputEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.seriesfilm.R
 
 class Landing : AppCompatActivity() {
-    lateinit var loginButton: Button
-    lateinit var signUpButton: Button
+    private lateinit var loginButton: Button
+    private lateinit var signUpButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

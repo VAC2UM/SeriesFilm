@@ -1,8 +1,10 @@
 package com.example.seriesfilm
 
 import com.example.seriesfilm.data.AutocompleteSearchResponse
+import com.example.seriesfilm.data.TitleDetailsResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface Api {
@@ -16,4 +18,10 @@ interface Api {
         @Query("search_type") searchType: Int,
         @Query("apiKey") apiKey: String = API_KEY,
     ): Call<AutocompleteSearchResponse>
+
+    @GET("v1/title/{title_id}/details/")
+    fun getTitleDetails(
+        @Path("title_id") titleId: Long,
+        @Query("apiKey") apiKey: String = API_KEY,
+    ): Call<TitleDetailsResponse>
 }
