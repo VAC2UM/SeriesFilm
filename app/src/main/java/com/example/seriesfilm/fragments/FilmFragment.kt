@@ -61,7 +61,7 @@ class FilmFragment : Fragment() {
 
     override fun onViewCreated(
         view: View,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
         Toast.makeText(context, "Film: ${movie.name}", Toast.LENGTH_SHORT).show()
@@ -76,7 +76,7 @@ class FilmFragment : Fragment() {
                 Toast.makeText(
                     context,
                     "Ошибка загрузки: ${error ?: "Unknown"}",
-                    Toast.LENGTH_SHORT
+                    Toast.LENGTH_SHORT,
                 ).show()
             }
         }
