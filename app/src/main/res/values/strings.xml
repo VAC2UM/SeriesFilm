@@ -21,6 +21,7 @@
     <string name="privacy">Приватность</string>
     <string name="storage">Список фильмов</string>
     <string name="help">Помощь</string>
+    <string name="logout">Выйти из аккаунта</string>
     <string name="error_fetch_movies">Пожалуйста, проверьте своё интернет-соединение</string>
     <string name="update">Обновить</string>
     <string name="name">Имя</string>

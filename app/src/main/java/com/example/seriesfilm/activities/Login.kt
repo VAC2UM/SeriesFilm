@@ -1,6 +1,7 @@
 package com.example.seriesfilm.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -14,32 +15,62 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class Login : AppCompatActivity() {
-    lateinit var loginButton: Button
-    lateinit var etLogin: TextInputEditText
-    lateinit var etPassword: TextInputEditText
-    lateinit var questionButton: Button
+    private lateinit var loginButton: Button
+    private lateinit var etLogin: TextInputEditText
+    private lateinit var etPassword: TextInputEditText
+    private lateinit var questionButton: Button
+    private lateinit var sharedPreferences: SharedPreferences
+
+    private val userNameKey = "username"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE)
+
+        initViews()
+        setupListeners()
+    }
+
+    private fun initViews() {
         loginButton = findViewById(R.id.loginButton)
         etLogin = findViewById(R.id.etLogin)
         etPassword = findViewById(R.id.etPassword)
         questionButton = findViewById(R.id.questionButton)
+    }
 
+    private fun setupListeners() {
         loginButton.setOnClickListener {
             val login = etLogin.text.toString()
             val password = etPassword.text.toString()
-            if (login.isNotEmpty() && password.isNotEmpty()) {
+
+            if (validateInput(login, password)) {
                 loginUser(login, password)
-            } else {
-                Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()
             }
         }
+
         questionButton.setOnClickListener {
-            val intent = Intent(this, SignUp::class.java)
-            startActivity(intent)
+            startActivity(Intent(this@Login, SignUp::class.java))
+        }
+    }
+
+    private fun validateInput(
+        login: String,
+        password: String,
+    ): Boolean {
+        return when {
+            login.isEmpty() -> {
+                Toast.makeText(this@Login, "Введите логин", Toast.LENGTH_SHORT).show()
+                false
+            }
+
+            password.isEmpty() -> {
+                Toast.makeText(this@Login, "Введите пароль", Toast.LENGTH_SHORT).show()
+                false
+            }
+
+            else -> true
         }
     }
 
@@ -61,10 +92,9 @@ class Login : AppCompatActivity() {
                     response: Response<AuthModels.AuthResponse>,
                 ) {
                     if (response.isSuccessful) {
+                        saveUserData(login)
                         Toast.makeText(this@Login, "Успешный вход!", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@Login, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                        startMainActivity()
                     } else {
                         Toast.makeText(this@Login, "Ошибка входа!", Toast.LENGTH_SHORT).show()
                     }
@@ -79,5 +109,17 @@ class Login : AppCompatActivity() {
                 }
             },
         )
+    }
+
+    private fun saveUserData(username: String) {
+        sharedPreferences.edit()
+            .putString(userNameKey, username)
+            .apply()
+    }
+
+    private fun startMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
