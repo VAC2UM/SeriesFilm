@@ -16,7 +16,6 @@ class SettingsFragment : Fragment() {
     private lateinit var logoutLayout: ConstraintLayout
     private lateinit var sharedPreferences: SharedPreferences
 
-
     private val userNameKey = "username"
 
     override fun onCreateView(

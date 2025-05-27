@@ -55,7 +55,10 @@ class Login : AppCompatActivity() {
         }
     }
 
-    private fun validateInput(login: String, password: String): Boolean {
+    private fun validateInput(
+        login: String,
+        password: String,
+    ): Boolean {
         return when {
             login.isEmpty() -> {
                 Toast.makeText(this@Login, "Введите логин", Toast.LENGTH_SHORT).show()
