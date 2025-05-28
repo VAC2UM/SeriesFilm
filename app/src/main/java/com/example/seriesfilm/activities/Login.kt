@@ -79,7 +79,10 @@ class Login : AppCompatActivity() {
         private const val USERNAME_KEY = "username"
     }
 
-    private fun loginUser(login: String, password: String) {
+    private fun loginUser(
+        login: String,
+        password: String,
+    ) {
         val call = ApiClient.authApi.login(
             AuthModels.LoginRequest(login, password)
         )
@@ -95,7 +98,11 @@ class Login : AppCompatActivity() {
                             Toast.makeText(this@Login, "Успешный вход!", Toast.LENGTH_SHORT).show()
                             startMainActivity()
                         } ?: run {
-                            Toast.makeText(this@Login, "Пустой ответ от сервера", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@Login,
+                                "Пустой ответ от сервера",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     } else {
                         Toast.makeText(this@Login, "Ошибка входа!", Toast.LENGTH_SHORT).show()
@@ -106,13 +113,17 @@ class Login : AppCompatActivity() {
                     call: Call<AuthModels.AuthResponse>,
                     t: Throwable,
                 ) {
-                    Toast.makeText(this@Login, "Ошибка сети: ${t.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Login, "Ошибка сети: ${t.message}", Toast.LENGTH_SHORT)
+                        .show()
                 }
             },
         )
     }
 
-    private fun saveAuthData(username: String, token: String) {
+    private fun saveAuthData(
+        username: String,
+        token: String,
+    ) {
         sharedPreferences.edit()
             .putString(USERNAME_KEY, username)
             .putString(TOKEN_KEY, token)

@@ -20,6 +20,6 @@ interface AuthApi {
     @POST("favorites/add")
     fun addToFavorites(
         @Header("Authorization") token: String,
-        @Body request: AuthModels.FavoriteRequest
+        @Body request: AuthModels.FavoriteRequest,
     ): Call<ResponseBody>
 }

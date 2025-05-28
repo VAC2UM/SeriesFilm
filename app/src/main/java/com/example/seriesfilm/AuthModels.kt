@@ -17,11 +17,11 @@ class AuthModels {
     )
 
     data class FavoriteRequest(
-        val movieId: Int
+        val movieId: Int,
     )
 
     data class FavoriteResponse(
         val success: Boolean,
-        val message: String?
+        val message: String?,
     )
 }

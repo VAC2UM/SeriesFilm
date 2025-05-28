@@ -68,7 +68,8 @@ class FilmFragment : Fragment() {
         backdrop = view.findViewById(R.id.filmBackdrop)
         overwiew = view.findViewById(R.id.filmDescription)
         favoriteButton = view.findViewById(R.id.favoriteButton)
-        sharedPreferences = requireContext().getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
+        sharedPreferences =
+            requireContext().getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
 
         favoriteButton.setOnClickListener {
             toggleFavorite()
@@ -119,7 +120,6 @@ class FilmFragment : Fragment() {
         filmName.text = details.title
         overwiew.text = details.overwiew
         filmYear.text = movie.year.toString()
-
     }
 
     private fun toggleFavorite() {
@@ -138,7 +138,7 @@ class FilmFragment : Fragment() {
             object : retrofit2.Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
+                    response: Response<ResponseBody>,
                 ) {
                     if (response.isSuccessful) {
                         val responseText = response.body()?.string() ?: "Movie added to favorites"
@@ -150,11 +150,15 @@ class FilmFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<ResponseBody>,
+                    t: Throwable,
+                ) {
                     revertFavoriteState()
-                    Toast.makeText(context, "Network error: ${t.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Network error: ${t.message}", Toast.LENGTH_SHORT)
+                        .show()
                 }
-            }
+            },
         )
     }
 
@@ -165,8 +169,11 @@ class FilmFragment : Fragment() {
 
     private fun updateFavoriteButton() {
         favoriteButton.setImageResource(
-            if (isFavorite) R.drawable.favorite_selected
-            else R.drawable.favorite_not_selected
+            if (isFavorite) {
+                R.drawable.favorite_selected
+            } else {
+                R.drawable.favorite_not_selected
+            }
         )
     }
 }
