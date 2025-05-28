@@ -16,8 +16,6 @@ class SettingsFragment : Fragment() {
     private lateinit var logoutLayout: ConstraintLayout
     private lateinit var sharedPreferences: SharedPreferences
 
-    private val userNameKey = "username"
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,12 +31,18 @@ class SettingsFragment : Fragment() {
         logoutLayout = view.findViewById(R.id.logoutLayout)
     }
 
+    companion object {
+        private const val TOKEN_KEY = "auth_token"
+        private const val USERNAME_KEY = "username"
+    }
+
     private fun setupClickListeners() {
         sharedPreferences = requireContext().getSharedPreferences("LoginPrefs", MODE_PRIVATE)
 
         logoutLayout.setOnClickListener {
             sharedPreferences.edit()
-                .remove(userNameKey)
+                .remove(TOKEN_KEY)
+                .remove(USERNAME_KEY)
                 .apply()
 
             val intent = Intent(requireContext(), Login::class.java)

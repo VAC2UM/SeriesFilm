@@ -85,4 +85,8 @@ object MoviesRepository {
             },
         )
     }
+
+    fun checkFavoriteStatus(movieId: Long, callback: (Boolean) -> Unit) {
+        callback(false)
+    }
 }

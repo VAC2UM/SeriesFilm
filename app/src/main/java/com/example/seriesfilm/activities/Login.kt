@@ -74,17 +74,15 @@ class Login : AppCompatActivity() {
         }
     }
 
-    private fun loginUser(
-        login: String,
-        password: String,
-    ) {
-        val call =
-            ApiClient.authApi.login(
-                AuthModels.LoginRequest(
-                    login,
-                    password,
-                ),
-            )
+    companion object {
+        private const val TOKEN_KEY = "auth_token"
+        private const val USERNAME_KEY = "username"
+    }
+
+    private fun loginUser(login: String, password: String) {
+        val call = ApiClient.authApi.login(
+            AuthModels.LoginRequest(login, password)
+        )
         call.enqueue(
             object : Callback<AuthModels.AuthResponse> {
                 override fun onResponse(
@@ -92,9 +90,13 @@ class Login : AppCompatActivity() {
                     response: Response<AuthModels.AuthResponse>,
                 ) {
                     if (response.isSuccessful) {
-                        saveUserData(login)
-                        Toast.makeText(this@Login, "Успешный вход!", Toast.LENGTH_SHORT).show()
-                        startMainActivity()
+                        response.body()?.let { authResponse ->
+                            saveAuthData(login, authResponse.token)
+                            Toast.makeText(this@Login, "Успешный вход!", Toast.LENGTH_SHORT).show()
+                            startMainActivity()
+                        } ?: run {
+                            Toast.makeText(this@Login, "Пустой ответ от сервера", Toast.LENGTH_SHORT).show()
+                        }
                     } else {
                         Toast.makeText(this@Login, "Ошибка входа!", Toast.LENGTH_SHORT).show()
                     }
@@ -104,11 +106,17 @@ class Login : AppCompatActivity() {
                     call: Call<AuthModels.AuthResponse>,
                     t: Throwable,
                 ) {
-                    Toast.makeText(this@Login, "Ошибка сети: ${t.message}", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this@Login, "Ошибка сети: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
             },
         )
+    }
+
+    private fun saveAuthData(username: String, token: String) {
+        sharedPreferences.edit()
+            .putString(USERNAME_KEY, username)
+            .putString(TOKEN_KEY, token)
+            .apply()
     }
 
     private fun saveUserData(username: String) {

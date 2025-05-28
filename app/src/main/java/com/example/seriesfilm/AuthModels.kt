@@ -15,4 +15,13 @@ class AuthModels {
     data class AuthResponse(
         val token: String,
     )
+
+    data class FavoriteRequest(
+        val movieId: Int
+    )
+
+    data class FavoriteResponse(
+        val success: Boolean,
+        val message: String?
+    )
 }
