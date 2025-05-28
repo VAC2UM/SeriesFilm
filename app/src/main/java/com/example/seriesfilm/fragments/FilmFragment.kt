@@ -173,7 +173,7 @@ class FilmFragment : Fragment() {
                 R.drawable.favorite_selected
             } else {
                 R.drawable.favorite_not_selected
-            }
+            },
         )
     }
 }

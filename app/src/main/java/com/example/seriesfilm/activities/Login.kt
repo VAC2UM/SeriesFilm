@@ -83,9 +83,10 @@ class Login : AppCompatActivity() {
         login: String,
         password: String,
     ) {
-        val call = ApiClient.authApi.login(
-            AuthModels.LoginRequest(login, password)
-        )
+        val call =
+            ApiClient.authApi.login(
+                AuthModels.LoginRequest(login, password),
+            )
         call.enqueue(
             object : Callback<AuthModels.AuthResponse> {
                 override fun onResponse(
@@ -101,7 +102,7 @@ class Login : AppCompatActivity() {
                             Toast.makeText(
                                 this@Login,
                                 "Пустой ответ от сервера",
-                                Toast.LENGTH_SHORT
+                                Toast.LENGTH_SHORT,
                             ).show()
                         }
                     } else {
