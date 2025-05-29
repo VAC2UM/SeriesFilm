@@ -24,8 +24,8 @@ import retrofit2.Response
 
 class FilmFragment : Fragment() {
     lateinit var movie: SearchResult
-
     private var isFavorite = false
+    private lateinit var titleDetails: TitleDetailsResponse
 
     private lateinit var favoriteButton: ImageView
     private lateinit var filmTitle: TextView
@@ -68,8 +68,7 @@ class FilmFragment : Fragment() {
         backdrop = view.findViewById(R.id.filmBackdrop)
         overwiew = view.findViewById(R.id.filmDescription)
         favoriteButton = view.findViewById(R.id.favoriteButton)
-        sharedPreferences =
-            requireContext().getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
+        sharedPreferences = requireContext().getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
 
         favoriteButton.setOnClickListener {
             toggleFavorite()
@@ -80,17 +79,10 @@ class FilmFragment : Fragment() {
         return view
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?,
-    ) {
-        super.onViewCreated(view, savedInstanceState)
-        Toast.makeText(context, "Film: ${movie.name}", Toast.LENGTH_SHORT).show()
-    }
-
     private fun loadTitleDetails(titleId: Long) {
         MoviesRepository.fetchTitleDetails(titleId) { details, error ->
             if (details != null) {
+                titleDetails = details
                 updateUI(details)
                 MoviesRepository.checkFavoriteStatus(titleId) { isFav ->
                     activity?.runOnUiThread {
@@ -109,7 +101,7 @@ class FilmFragment : Fragment() {
     }
 
     private fun updateUI(details: TitleDetailsResponse) {
-        // Устанавливаем backdrop изображение
+        // Устанавливаем backdrop изображение без плейсхолдера
         if (details.backdrop.isNotEmpty()) {
             Picasso.get()
                 .load(details.backdrop)
@@ -132,17 +124,26 @@ class FilmFragment : Fragment() {
         isFavorite = !isFavorite
         updateFavoriteButton()
 
-        val request = AuthModels.FavoriteRequest(movieId = movie.id.toInt())
+        val request = AuthModels.FavoriteRequest(
+            movieId = movie.id.toInt(),
+            movieTitle = movie.name,
+            moviePoster = movie.imageUrl,
+        )
 
         ApiClient.authApi.addToFavorites(token, request).enqueue(
-            object : retrofit2.Callback<ResponseBody> {
+            object : Callback<Void> {
                 override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>,
+                    call: Call<Void>,
+                    response: Response<Void>
                 ) {
                     if (response.isSuccessful) {
-                        val responseText = response.body()?.string() ?: "Movie added to favorites"
-                        Toast.makeText(context, responseText, Toast.LENGTH_SHORT).show()
+                        val message = if (isFavorite) "Added to favorites" else "Removed from favorites"
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
+                        // Обновляем список избранных через интерфейс
+                        (parentFragmentManager.findFragmentByTag("favorites") as? FavoritesFragment)?.let {
+                            it.loadFavorites()
+                        }
                     } else {
                         revertFavoriteState()
                         val errorText = response.errorBody()?.string() ?: "Server error"
@@ -151,14 +152,13 @@ class FilmFragment : Fragment() {
                 }
 
                 override fun onFailure(
-                    call: Call<ResponseBody>,
-                    t: Throwable,
+                    call: Call<Void>,
+                    t: Throwable
                 ) {
                     revertFavoriteState()
-                    Toast.makeText(context, "Network error: ${t.message}", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(context, "Network error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
-            },
+            }
         )
     }
 

@@ -18,10 +18,17 @@ class AuthModels {
 
     data class FavoriteRequest(
         val movieId: Int,
+        val movieTitle: String,
+        val moviePoster: String?
     )
 
     data class FavoriteResponse(
-        val success: Boolean,
-        val message: String?,
+        val favorites: List<FavoriteItem>
+    )
+
+    data class FavoriteItem(
+        val movieId: Int,
+        val movieTitle: String,
+        val moviePoster: String?
     )
 }

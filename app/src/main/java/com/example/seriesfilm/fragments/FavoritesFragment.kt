@@ -1,46 +1,75 @@
 package com.example.seriesfilm.fragments
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.seriesfilm.ApiClient
 import com.example.seriesfilm.R
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.seriesfilm.adapters.FavoritesAdapter
+import com.example.seriesfilm.AuthModels
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FavoritesFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var recyclerView: RecyclerView
+    private val adapter by lazy {
+        FavoritesAdapter(emptyList()) { movieId ->
+            // Обработка клика по элементу
         }
     }
+    private lateinit var emptyView: View
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_favorites, container, false)
+        val view = inflater.inflate(R.layout.fragment_favorites, container, false)
+        sharedPreferences = requireContext().getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
+
+        // Инициализация RecyclerView
+        recyclerView = view.findViewById(R.id.recyclerViewFavorites)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
+
+        loadFavorites()
+        return view
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(
-            param1: String,
-            param2: String,
-        ) = FavoritesFragment().apply {
-            arguments =
-                Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    fun loadFavorites() {
+        val token = sharedPreferences.getString("auth_token", "") ?: ""
+        if (token.isEmpty()) {
+            Toast.makeText(context, "Please login first", Toast.LENGTH_SHORT).show()
+            return
         }
+
+        ApiClient.authApi.getFavorites(token).enqueue(
+            object : Callback<AuthModels.FavoriteResponse> {
+                override fun onResponse(
+                    call: Call<AuthModels.FavoriteResponse>,
+                    response: Response<AuthModels.FavoriteResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val favorites = response.body()?.favorites ?: emptyList()
+                        adapter.updateFavorites(favorites)
+                    } else {
+                        Toast.makeText(context, "Failed to load favorites", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<AuthModels.FavoriteResponse>, t: Throwable) {
+                    Toast.makeText(context, "Network error: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
     }
 }
