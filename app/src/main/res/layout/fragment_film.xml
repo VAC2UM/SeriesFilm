@@ -25,53 +25,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/filmTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/filmBackdrop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/film_backdrop"
+        app:layout_constraintBottom_toTopOf="@+id/filmInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButton">
+        app:layout_constraintTop_toBottomOf="@+id/backButton"
+        app:layout_constraintDimensionRatio="16:9" />
 
-        <TextView
-            android:id="@+id/filmTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/filmTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:shadowColor="@color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        app:layout_constraintBottom_toBottomOf="@id/filmBackdrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/filmBackdrop"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/filmTitle" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <!-- Информация о фильме -->
     <LinearLayout
         android:id="@+id/filmInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filmTop">
+        app:layout_constraintTop_toBottomOf="@id/filmBackdrop">
 
         <TextView
             android:id="@+id/filmName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -80,34 +79,28 @@
             android:id="@+id/filmYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:textColor="@color/gray" />
 
         <TextView
+            android:id="@+id/filmType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white" />
+
+        <TextView
             android:id="@+id/filmDescription"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:textColor="@color/white" />
 
         <TextView
-            android:id="@+id/filmStars"
+            android:id="@+id/markIMDB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/filmCreators"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/filmGenres"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textSize="30sp"
             android:textColor="@color/white" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,9 @@
     <string name="search">Поиск</string>
     <string name="search_for_title">Поиск по названию...</string>
     <string name="settings">Настройки</string>
-    <string name="popular_movie">Популярные фильмы</string>
+    <string name="title_info">"Фильмотека" — это ваш персональный киноархив.</string>
+    <string name="info_about_app">Простое и удобное приложение для тех, кто любит кино, но не хочет тратить время на оценки и рецензии.</string>
+    <string name="info_about_developer">Приложение было разработано студентом третьего курса РТУ МИРЭА, Никитой Голованевым.</string>
     <string name="new_movie">Новые фильмы</string>
     <string name="account">Аккаунт</string>
     <string name="privacy">Приватность</string>
@@ -27,4 +29,5 @@
     <string name="name">Имя</string>
     <string name="year">Год</string>
     <string name="director">Режиссер</string>
+    <string name="film_backdrop">Постер фильма</string>
 </resources>
