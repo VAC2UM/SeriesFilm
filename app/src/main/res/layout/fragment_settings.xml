@@ -61,16 +61,7 @@
                 android:layout_marginStart="10dp"
                 android:text="Vacuum"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/userMail"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:text="example@gmail.com"
-                android:textColor="@color/gray"
+                android:textSize="30sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

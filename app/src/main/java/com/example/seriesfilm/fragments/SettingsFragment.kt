@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.seriesfilm.R
@@ -15,6 +16,7 @@ import com.example.seriesfilm.activities.Login
 class SettingsFragment : Fragment() {
     private lateinit var logoutLayout: ConstraintLayout
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var userNameTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,13 +25,23 @@ class SettingsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
         initViews(view)
+        loadUserData()
         setupClickListeners()
         return view
     }
 
     private fun initViews(view: View) {
         logoutLayout = view.findViewById(R.id.logoutLayout)
+        userNameTextView = view.findViewById(R.id.userName)
+        sharedPreferences = requireContext().getSharedPreferences("LoginPrefs", MODE_PRIVATE)
     }
+
+    private fun loadUserData() {
+        val username = sharedPreferences.getString(USERNAME_KEY, "User") ?: "User"
+
+        userNameTextView.text = username
+    }
+
 
     companion object {
         private const val TOKEN_KEY = "auth_token"
