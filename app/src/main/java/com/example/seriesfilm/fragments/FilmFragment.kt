@@ -31,8 +31,10 @@ class FilmFragment : Fragment() {
     private lateinit var filmTitle: TextView
     private lateinit var filmName: TextView
     private lateinit var filmYear: TextView
+    private lateinit var filmType: TextView
     private lateinit var backdrop: ImageView
     private lateinit var overwiew: TextView
+    private lateinit var userRating: TextView
     private lateinit var sharedPreferences: SharedPreferences
 
     companion object {
@@ -65,8 +67,10 @@ class FilmFragment : Fragment() {
         filmTitle = view.findViewById(R.id.filmTitle)
         filmName = view.findViewById(R.id.filmName)
         filmYear = view.findViewById(R.id.filmYear)
+        filmType = view.findViewById(R.id.filmType)
         backdrop = view.findViewById(R.id.filmBackdrop)
         overwiew = view.findViewById(R.id.filmDescription)
+        userRating = view.findViewById(R.id.markIMDB)
         favoriteButton = view.findViewById(R.id.favoriteButton)
         sharedPreferences = requireContext().getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
 
@@ -101,7 +105,6 @@ class FilmFragment : Fragment() {
     }
 
     private fun updateUI(details: TitleDetailsResponse) {
-        // Устанавливаем backdrop изображение без плейсхолдера
         if (details.backdrop.isNotEmpty()) {
             Picasso.get()
                 .load(details.backdrop)
@@ -109,9 +112,27 @@ class FilmFragment : Fragment() {
         }
 
         filmTitle.text = details.title
-        filmName.text = details.title
+        filmName.text = details.originalTitle
         overwiew.text = details.overwiew
+        userRating.text = "Оценка зрителей: " + details.userRating
         filmYear.text = movie.year.toString()
+        filmType.text = movie.type
+
+        setRatingColor(details.userRating)
+    }
+
+    private fun setRatingColor(ratingString: String) {
+        try {
+            val numericRating = ratingString.substringBefore("/").toFloat()
+            val color = when {
+                numericRating < 4.0 -> R.color.rating_red
+                numericRating < 7.0 -> R.color.rating_yellow
+                else -> R.color.rating_green
+            }
+            userRating.setTextColor(resources.getColor(color, null))
+        } catch (e: Exception) {
+            userRating.setTextColor(resources.getColor(R.color.default_text_color, null))
+        }
     }
 
     private fun toggleFavorite() {
