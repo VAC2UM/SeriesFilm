@@ -30,4 +30,6 @@
     <string name="year">Год</string>
     <string name="director">Режиссер</string>
     <string name="film_backdrop">Постер фильма</string>
+    <string name="theme">Тема</string>
+
 </resources>

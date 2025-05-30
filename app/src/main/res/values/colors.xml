@@ -10,4 +10,9 @@
     <color name="rating_yellow">#FFC107</color>
     <color name="rating_green">#4CAF50</color>
     <color name="default_text_color">#FFFFFF</color>
+
+    <color name="background_color">#FFFFFF</color>
+    <color name="text_color">#000000</color>
+    <color name="primary">#6200EE</color>
+    <color name="accent">#03DAC5</color>
 </resources>

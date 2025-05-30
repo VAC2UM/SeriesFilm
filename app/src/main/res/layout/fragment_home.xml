@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     android:orientation="vertical"
     tools:context=".fragments.HomeFragment">
 
@@ -32,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/title_info"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -42,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/info_about_app"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:textSize="18sp" />
 
         <TextView
@@ -51,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/info_about_developer"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>

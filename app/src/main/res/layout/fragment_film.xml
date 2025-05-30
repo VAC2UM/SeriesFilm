@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     tools:context=".fragments.FilmFragment">
 
     <ImageView
@@ -44,7 +43,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:textSize="18sp"
         android:textStyle="bold"
         android:shadowColor="@color/black"
@@ -71,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -80,27 +79,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/gray" />
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/filmType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/white" />
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/filmDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/white" />
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/markIMDB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
-            android:textColor="@color/white" />
+            android:textColor="@color/text_color" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
